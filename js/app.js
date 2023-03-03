@@ -1,8 +1,8 @@
 'use strict';
 
 // Data
-import { data } from "./data.js";
-import { STATUSES } from "./constants";
+import { data } from './data.js';
+import { STATUSES } from './constants.js';
 
 let todoList = null;
 
@@ -16,13 +16,13 @@ import {
   lowForm,
   lowField,
   lowBtn,
-} from "./views.js";
+} from './views.js';
 
-import { resetFields } from "./utils";
-import { checkEmptyString } from "./validators";
+import { resetFields } from './utils.js';
+import { checkEmptyString } from './validators.js';
 
 // Features
-function init () {
+function init() {
   todoList = [...data] || [];
 
   if (!todoList.length) {
@@ -51,13 +51,13 @@ function addNewTask(e, { group, field, status }) {
   render(group);
 }
 
-function render () {
+function render() {
   // Reset DOM
   highTasks.innerHTML = '';
   lowTasks.innerHTML = '';
 
   // Render DOM
-  todoList.forEach(task => {
+  todoList.forEach((task) => {
     const elDiv = document.createElement('div');
     const elBtn = document.createElement('button');
     const existHigh = highTasks.querySelector(`[data-id="${task.id}"]`);
@@ -90,9 +90,11 @@ function render () {
         elDiv.querySelector('.task__text').classList.add('done');
       }
 
-      elDiv.querySelector('.task__checkbox').addEventListener('click', function () {
-        elDiv.querySelector('.task__text').classList.toggle('done');
-      });
+      elDiv
+        .querySelector('.task__checkbox')
+        .addEventListener('click', function () {
+          elDiv.querySelector('.task__text').classList.toggle('done');
+        });
 
       elDiv.appendChild(elBtn);
 
@@ -109,13 +111,17 @@ function render () {
 
 // Init App
 window.addEventListener('DOMContentLoaded', init);
-highForm.addEventListener('submit', (e) => addNewTask(e, {
-  group: highTasks,
-  field: highField,
-  status: STATUSES.HIGH
-}));
-lowForm.addEventListener('submit', (e) => addNewTask(e, {
-  group: lowTasks,
-  field: lowField,
-  status: STATUSES.LOW
-}));
+highForm.addEventListener('submit', (e) =>
+  addNewTask(e, {
+    group: highTasks,
+    field: highField,
+    status: STATUSES.HIGH,
+  })
+);
+lowForm.addEventListener('submit', (e) =>
+  addNewTask(e, {
+    group: lowTasks,
+    field: lowField,
+    status: STATUSES.LOW,
+  })
+);

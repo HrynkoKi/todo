@@ -1,4 +1,4 @@
-export const data = [
+const data = [
   {
     id: 1,
     text: 'Вот вам и супер интересная тема',
@@ -24,3 +24,5 @@ export const data = [
     done: false,
   }
 ];
+
+export { data };
